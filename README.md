@@ -46,6 +46,10 @@ gcloud compute shared-vpc enable --project $HOST_PROJECT_ID
 
 ## List of test cases
 
+The following test cases mention protected projects. Protected projects are host projects that we which to restrict modifications by restricting modifications from being deployed through specific authorized modules monitored by a Sentinel policy. This policy however does not care if the project is a host project or not, it just cares about its ID.
+
+For the purpose of test setup, only projects on the 'od' organization are considered to be protected.
+
 ### Pass cases
 
 * `pass_case1` tries to deploy `google_project_iam_member` on a project that is not protected from TF's root module;
