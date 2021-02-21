@@ -1,6 +1,6 @@
 module "pass_case3" {
   source  = "app.terraform.io/rjmco/sentinel-illegal-module/google"
-  version = "0.0.1+experiment.0"
+  version = "0.0.1+experiment.1"
 
   environment = var.environment
   organization = var.organization
