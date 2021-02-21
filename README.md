@@ -71,3 +71,7 @@ protected-host-project-2
 * `fail_case2` tries to deploy `google_compute_shared_vpc_service_project` on one of the protected host projects from TF's root module 
 * `fail_case3` tries to deploy both type of resources on one of the protected projects with the `illegal_module`;
 * `fail_case4` tries to deploy both type of resources on one of the protected projects with the `illegal_nested_module`;
+
+## Terraform Cloud Generated Sentinel Mocks
+
+Sentinel Mocks for all the above test scenarios can be found on the [sentinel/test/protect-host-projects-iam-and-attachments/ folder](sentinel/test/protect-host-projects-iam-and-attachments/).
