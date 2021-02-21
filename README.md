@@ -37,10 +37,10 @@ All projects referenced on the code are ficticious and if they exist it is out o
 
 The Terraform Modules mentioned above can be found on the following GitHub repositories:
 
-[https://github.com/rjmco/terraform-google-sentinel-simple-module]
-[https://github.com/rjmco/terraform-google-sentinel-nested-module]
-[https://github.com/rjmco/terraform-google-sentinel-illegal-module]
-[https://github.com/rjmco/terraform-google-sentinel-illegal-nested-module]
+* https://github.com/rjmco/terraform-google-sentinel-simple-module
+* https://github.com/rjmco/terraform-google-sentinel-nested-module
+* https://github.com/rjmco/terraform-google-sentinel-illegal-module
+* https://github.com/rjmco/terraform-google-sentinel-illegal-nested-module
 
 ## List of test cases
 
