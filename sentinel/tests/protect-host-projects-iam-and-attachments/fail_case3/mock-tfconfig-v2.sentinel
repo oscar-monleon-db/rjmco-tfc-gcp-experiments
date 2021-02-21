@@ -1,0 +1,211 @@
+import "strings"
+
+providers = {
+	"module.pass_case3:google": {
+		"alias":               "",
+		"config":              {},
+		"module_address":      "module.pass_case3",
+		"name":                "google",
+		"provider_config_key": "module.pass_case3:google",
+		"version_constraint":  ">= 3.57.0",
+	},
+	"module.pass_case3:google-beta": {
+		"alias":               "",
+		"config":              {},
+		"module_address":      "module.pass_case3",
+		"name":                "google-beta",
+		"provider_config_key": "module.pass_case3:google-beta",
+		"version_constraint":  ">= 3.57.0",
+	},
+}
+
+resources = {
+	"module.pass_case3.google_compute_shared_vpc_service_project.svc_proj_attachment": {
+		"address": "module.pass_case3.google_compute_shared_vpc_service_project.svc_proj_attachment",
+		"config": {
+			"host_project": {
+				"references": [
+					"local.host_project_ids",
+					"var.organization",
+					"var.environment",
+				],
+			},
+			"service_project": {
+				"references": [
+					"var.service_project_id",
+				],
+			},
+		},
+		"count":               {},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "module.pass_case3",
+		"name":                "svc_proj_attachment",
+		"provider_config_key": "module.pass_case3:google",
+		"provisioners":        [],
+		"type":                "google_compute_shared_vpc_service_project",
+	},
+	"module.pass_case3.google_project_iam_member.gke_hostagent_binding": {
+		"address": "module.pass_case3.google_project_iam_member.gke_hostagent_binding",
+		"config": {
+			"member": {
+				"references": [
+					"google_project_service_identity.gke_hostagent_sa",
+				],
+			},
+			"project": {
+				"references": [
+					"local.host_project_ids",
+					"var.organization",
+					"var.environment",
+				],
+			},
+			"role": {
+				"constant_value": "roles/container.hostServiceAgentUser",
+			},
+		},
+		"count":               {},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "module.pass_case3",
+		"name":                "gke_hostagent_binding",
+		"provider_config_key": "module.pass_case3:google",
+		"provisioners":        [],
+		"type":                "google_project_iam_member",
+	},
+	"module.pass_case3.google_project_service.gke_svc": {
+		"address": "module.pass_case3.google_project_service.gke_svc",
+		"config": {
+			"disable_dependent_services": {
+				"constant_value": false,
+			},
+			"disable_on_destroy": {
+				"constant_value": false,
+			},
+			"project": {
+				"references": [
+					"var.service_project_id",
+				],
+			},
+			"service": {
+				"constant_value": "container.googleapis.com",
+			},
+		},
+		"count":               {},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "module.pass_case3",
+		"name":                "gke_svc",
+		"provider_config_key": "module.pass_case3:google",
+		"provisioners":        [],
+		"type":                "google_project_service",
+	},
+	"module.pass_case3.google_project_service_identity.gke_hostagent_sa": {
+		"address": "module.pass_case3.google_project_service_identity.gke_hostagent_sa",
+		"config": {
+			"project": {
+				"references": [
+					"var.service_project_id",
+				],
+			},
+			"service": {
+				"constant_value": "container.googleapis.com",
+			},
+		},
+		"count": {},
+		"depends_on": [
+			"google_project_service.gke_svc",
+		],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "module.pass_case3",
+		"name":                "gke_hostagent_sa",
+		"provider_config_key": "module.pass_case3:google-beta",
+		"provisioners":        [],
+		"type":                "google_project_service_identity",
+	},
+}
+
+provisioners = {}
+
+variables = {
+	"environment": {
+		"default":        null,
+		"description":    "Environment the service project is on. Possible values are: 'dev', 'uat' and 'prd'",
+		"module_address": "",
+		"name":           "environment",
+	},
+	"module.pass_case3:environment": {
+		"default":        null,
+		"description":    "Environment the service project is on. Possible values are: 'dev', 'uat' and 'prd'",
+		"module_address": "module.pass_case3",
+		"name":           "environment",
+	},
+	"module.pass_case3:organization": {
+		"default":        null,
+		"description":    "Organization the service project is on. Possible values are: 'od', 'ot,' 'op'",
+		"module_address": "module.pass_case3",
+		"name":           "organization",
+	},
+	"module.pass_case3:service_project_id": {
+		"default":        null,
+		"description":    "GCP service project ID",
+		"module_address": "module.pass_case3",
+		"name":           "service_project_id",
+	},
+	"organization": {
+		"default":        null,
+		"description":    "Organization the service project is on. Possible values are: 'od', 'ot,' 'op'",
+		"module_address": "",
+		"name":           "organization",
+	},
+	"service_project_id": {
+		"default":        null,
+		"description":    "GCP service project ID",
+		"module_address": "",
+		"name":           "service_project_id",
+	},
+}
+
+outputs = {}
+
+module_calls = {
+	"pass_case3": {
+		"config": {
+			"environment": {
+				"references": [
+					"var.environment",
+				],
+			},
+			"organization": {
+				"references": [
+					"var.organization",
+				],
+			},
+			"service_project_id": {
+				"references": [
+					"var.service_project_id",
+				],
+			},
+		},
+		"count":              {},
+		"depends_on":         [],
+		"for_each":           {},
+		"module_address":     "",
+		"name":               "pass_case3",
+		"source":             "app.terraform.io/rjmco/sentinel-illegal-module/google",
+		"version_constraint": "0.0.1+experiment.2",
+	},
+}
+
+strip_index = func(addr) {
+	s = strings.split(addr, ".")
+	for s as i, v {
+		s[i] = strings.split(v, "[")[0]
+	}
+
+	return strings.join(s, ".")
+}

@@ -1,0 +1,33 @@
+id = "run-EArR2E7tUjpqor4b"
+created_at = "2021-02-21T16:52:38.452Z"
+message = "mv vars from TFC to auto.tfvars"
+commit_sha = "e44a939b33dcb736eea4ab1c9d9948572a8ffec9"
+speculative = false
+is_destroy = false
+target_addrs = null
+
+variables = {
+	"GOOGLE_CREDENTIALS": {
+		"category":  "env",
+		"sensitive": true,
+	},
+}
+
+organization = {
+	"name": "rjmco",
+}
+
+workspace = {
+	"auto_apply":  false,
+	"created_at":  "2021-02-21T14:29:10.114Z",
+	"description": null,
+	"id":          "ws-8Jj2Wb7gaJCXPmh2",
+	"name":        "rjmco-tfc-gcp-experiments_pass_case2",
+	"vcs_repo": {
+		"branch":             "",
+		"display_identifier": "rjmco/rjmco-tfc-gcp-experiments",
+		"identifier":         "rjmco/rjmco-tfc-gcp-experiments",
+		"ingress_submodules": false,
+	},
+	"working_directory": "pass_case2",
+}

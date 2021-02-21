@@ -1,0 +1,33 @@
+id = "run-ZrEaMx45iQbghLKX"
+created_at = "2021-02-21T17:19:07.996Z"
+message = "Adds pass_case7"
+commit_sha = "b723460e70400c83d64258a68d268f1a80e5312c"
+speculative = false
+is_destroy = false
+target_addrs = null
+
+variables = {
+	"GOOGLE_CREDENTIALS": {
+		"category":  "env",
+		"sensitive": true,
+	},
+}
+
+organization = {
+	"name": "rjmco",
+}
+
+workspace = {
+	"auto_apply":  false,
+	"created_at":  "2021-02-21T17:15:48.985Z",
+	"description": null,
+	"id":          "ws-Lcysdp2zZWknM6P5",
+	"name":        "rjmco-tfc-gcp-experiments_pass_case7",
+	"vcs_repo": {
+		"branch":             "",
+		"display_identifier": "rjmco/rjmco-tfc-gcp-experiments",
+		"identifier":         "rjmco/rjmco-tfc-gcp-experiments",
+		"ingress_submodules": false,
+	},
+	"working_directory": "pass_case7",
+}

@@ -1,0 +1,91 @@
+import "strings"
+import "types"
+
+_modules = {
+	"root": {
+		"data":    {},
+		"modules": {},
+		"outputs": {},
+		"providers": {
+			"google": {
+				"alias": {
+					"": {
+						"config":     {},
+						"references": {},
+						"version":    ">= 3.57.0",
+					},
+				},
+				"config":     {},
+				"references": {},
+				"version":    ">= 3.57.0",
+			},
+			"google-beta": {
+				"alias": {
+					"": {
+						"config":     {},
+						"references": {},
+						"version":    ">= 3.57.0",
+					},
+				},
+				"config":     {},
+				"references": {},
+				"version":    ">= 3.57.0",
+			},
+		},
+		"resources": {
+			"google_compute_shared_vpc_service_project": {
+				"svc_proj_attachment": {
+					"config":       {},
+					"provisioners": null,
+					"references": {
+						"host_project": [
+							"var.host_project_id",
+						],
+						"service_project": [
+							"var.service_project_id",
+						],
+					},
+				},
+			},
+		},
+		"variables": {
+			"host_project_id": {
+				"default":     null,
+				"description": "GCP host project ID",
+			},
+			"service_project_id": {
+				"default":     null,
+				"description": "GCP service project ID",
+			},
+		},
+	},
+}
+
+module_paths = [
+	[],
+]
+
+module = func(path) {
+	if types.type_of(path) is not "list" {
+		error("expected list, got", types.type_of(path))
+	}
+
+	if length(path) < 1 {
+		return _modules.root
+	}
+
+	addr = []
+	for path as p {
+		append(addr, "module")
+		append(addr, p)
+	}
+
+	return _modules[strings.join(addr, ".")]
+}
+
+data = _modules.root.data
+modules = _modules.root.modules
+providers = _modules.root.providers
+resources = _modules.root.resources
+variables = _modules.root.variables
+outputs = _modules.root.outputs

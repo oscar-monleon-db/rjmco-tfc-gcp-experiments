@@ -1,0 +1,258 @@
+import "strings"
+import "types"
+
+_modules = {
+	"root": {
+		"data": {},
+		"modules": {
+			"pass_case4": {
+				"config": {},
+				"references": {
+					"environment": [
+						"var.environment",
+					],
+					"organization": [
+						"var.organization",
+					],
+					"service_project_id": [
+						"var.service_project_id",
+					],
+				},
+				"source":  "app.terraform.io/rjmco/sentinel-illegal-nested-module/google",
+				"version": "0.0.1+experiment.1",
+			},
+		},
+		"outputs":   {},
+		"providers": {},
+		"resources": {},
+		"variables": {
+			"environment": {
+				"default":     null,
+				"description": "Environment the service project is on. Possible values are: 'dev', 'uat' and 'prd'",
+			},
+			"organization": {
+				"default":     null,
+				"description": "Organization the service project is on. Possible values are: 'od', 'ot,' 'op'",
+			},
+			"service_project_id": {
+				"default":     null,
+				"description": "GCP service project ID",
+			},
+		},
+	},
+
+	"module.pass_case4": {
+		"data": {},
+		"modules": {
+			"attach_gke_service_project": {
+				"config": {},
+				"references": {
+					"environment": [
+						"var.environment",
+					],
+					"organization": [
+						"var.organization",
+					],
+					"service_project_id": [
+						"var.service_project_id",
+					],
+				},
+				"source":  "./modules/simple_module",
+				"version": "",
+			},
+		},
+		"outputs": {},
+		"providers": {
+			"google": {
+				"alias": {
+					"": {
+						"config":     {},
+						"references": {},
+						"version":    ">= 3.57.0",
+					},
+				},
+				"config":     {},
+				"references": {},
+				"version":    ">= 3.57.0",
+			},
+			"google-beta": {
+				"alias": {
+					"": {
+						"config":     {},
+						"references": {},
+						"version":    ">= 3.57.0",
+					},
+				},
+				"config":     {},
+				"references": {},
+				"version":    ">= 3.57.0",
+			},
+		},
+		"resources": {},
+		"variables": {
+			"environment": {
+				"default":     null,
+				"description": "Environment the service project is on. Possible values are: 'dev', 'uat' and 'prd'",
+			},
+			"organization": {
+				"default":     null,
+				"description": "Organization the service project is on. Possible values are: 'od', 'ot,' 'op'",
+			},
+			"service_project_id": {
+				"default":     null,
+				"description": "GCP service project ID",
+			},
+		},
+	},
+
+	"module.pass_case4.module.attach_gke_service_project": {
+		"data":    {},
+		"modules": {},
+		"outputs": {},
+		"providers": {
+			"google": {
+				"alias": {
+					"": {
+						"config":     {},
+						"references": {},
+						"version":    ">= 3.57.0",
+					},
+				},
+				"config":     {},
+				"references": {},
+				"version":    ">= 3.57.0",
+			},
+			"google-beta": {
+				"alias": {
+					"": {
+						"config":     {},
+						"references": {},
+						"version":    ">= 3.57.0",
+					},
+				},
+				"config":     {},
+				"references": {},
+				"version":    ">= 3.57.0",
+			},
+		},
+		"resources": {
+			"google_compute_shared_vpc_service_project": {
+				"svc_proj_attachment": {
+					"config":       {},
+					"provisioners": null,
+					"references": {
+						"host_project": [
+							"local.host_project_ids",
+							"var.organization",
+							"var.environment",
+						],
+						"service_project": [
+							"var.service_project_id",
+						],
+					},
+				},
+			},
+			"google_project_iam_member": {
+				"gke_hostagent_binding": {
+					"config": {
+						"role": "roles/container.hostServiceAgentUser",
+					},
+					"provisioners": null,
+					"references": {
+						"member": [
+							"google_project_service_identity.gke_hostagent_sa",
+						],
+						"project": [
+							"local.host_project_ids",
+							"var.organization",
+							"var.environment",
+						],
+						"role": [],
+					},
+				},
+			},
+			"google_project_service": {
+				"gke_svc": {
+					"config": {
+						"disable_dependent_services": false,
+						"disable_on_destroy":         false,
+						"service":                    "container.googleapis.com",
+					},
+					"provisioners": null,
+					"references": {
+						"disable_dependent_services": [],
+						"disable_on_destroy":         [],
+						"project": [
+							"var.service_project_id",
+						],
+						"service": [],
+					},
+				},
+			},
+			"google_project_service_identity": {
+				"gke_hostagent_sa": {
+					"config": {
+						"service": "container.googleapis.com",
+					},
+					"provisioners": null,
+					"references": {
+						"project": [
+							"var.service_project_id",
+						],
+						"service": [],
+					},
+				},
+			},
+		},
+		"variables": {
+			"environment": {
+				"default":     null,
+				"description": "Environment the service project is on. Possible values are: 'dev', 'uat' and 'prd'",
+			},
+			"organization": {
+				"default":     null,
+				"description": "Organization the service project is on. Possible values are: 'od', 'ot,' 'op'",
+			},
+			"service_project_id": {
+				"default":     null,
+				"description": "GCP service project ID",
+			},
+		},
+	},
+}
+
+module_paths = [
+	[],
+	[
+		"pass_case4",
+	],
+	[
+		"pass_case4",
+		"attach_gke_service_project",
+	],
+]
+
+module = func(path) {
+	if types.type_of(path) is not "list" {
+		error("expected list, got", types.type_of(path))
+	}
+
+	if length(path) < 1 {
+		return _modules.root
+	}
+
+	addr = []
+	for path as p {
+		append(addr, "module")
+		append(addr, p)
+	}
+
+	return _modules[strings.join(addr, ".")]
+}
+
+data = _modules.root.data
+modules = _modules.root.modules
+providers = _modules.root.providers
+resources = _modules.root.resources
+variables = _modules.root.variables
+outputs = _modules.root.outputs

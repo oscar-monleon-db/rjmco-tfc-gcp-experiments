@@ -1,0 +1,126 @@
+import "strings"
+
+providers = {
+	"google": {
+		"alias":               "",
+		"config":              {},
+		"module_address":      "",
+		"name":                "google",
+		"provider_config_key": "google",
+		"version_constraint":  ">= 3.57.0",
+	},
+	"google-beta": {
+		"alias":               "",
+		"config":              {},
+		"module_address":      "",
+		"name":                "google-beta",
+		"provider_config_key": "google-beta",
+		"version_constraint":  ">= 3.57.0",
+	},
+}
+
+resources = {
+	"google_project_iam_member.gke_hostagent_binding": {
+		"address": "google_project_iam_member.gke_hostagent_binding",
+		"config": {
+			"member": {
+				"references": [
+					"google_project_service_identity.gke_hostagent_sa",
+				],
+			},
+			"project": {
+				"references": [
+					"var.project_id",
+				],
+			},
+			"role": {
+				"constant_value": "roles/container.hostServiceAgentUser",
+			},
+		},
+		"count":               {},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "",
+		"name":                "gke_hostagent_binding",
+		"provider_config_key": "google",
+		"provisioners":        [],
+		"type":                "google_project_iam_member",
+	},
+	"google_project_service.gke_svc": {
+		"address": "google_project_service.gke_svc",
+		"config": {
+			"disable_dependent_services": {
+				"constant_value": false,
+			},
+			"disable_on_destroy": {
+				"constant_value": false,
+			},
+			"project": {
+				"references": [
+					"var.project_id",
+				],
+			},
+			"service": {
+				"constant_value": "container.googleapis.com",
+			},
+		},
+		"count":               {},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "",
+		"name":                "gke_svc",
+		"provider_config_key": "google",
+		"provisioners":        [],
+		"type":                "google_project_service",
+	},
+	"google_project_service_identity.gke_hostagent_sa": {
+		"address": "google_project_service_identity.gke_hostagent_sa",
+		"config": {
+			"project": {
+				"references": [
+					"var.project_id",
+				],
+			},
+			"service": {
+				"constant_value": "container.googleapis.com",
+			},
+		},
+		"count": {},
+		"depends_on": [
+			"google_project_service.gke_svc",
+		],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "",
+		"name":                "gke_hostagent_sa",
+		"provider_config_key": "google-beta",
+		"provisioners":        [],
+		"type":                "google_project_service_identity",
+	},
+}
+
+provisioners = {}
+
+variables = {
+	"project_id": {
+		"default":        null,
+		"description":    "GCP project ID",
+		"module_address": "",
+		"name":           "project_id",
+	},
+}
+
+outputs = {}
+
+module_calls = {}
+
+strip_index = func(addr) {
+	s = strings.split(addr, ".")
+	for s as i, v {
+		s[i] = strings.split(v, "[")[0]
+	}
+
+	return strings.join(s, ".")
+}

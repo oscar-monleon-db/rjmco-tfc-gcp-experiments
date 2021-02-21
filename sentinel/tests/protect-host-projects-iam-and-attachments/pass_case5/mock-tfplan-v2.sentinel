@@ -1,0 +1,533 @@
+terraform_version = "0.14.7"
+
+planned_values = {
+	"outputs": {},
+	"resources": {
+		"module.pass_case5.google_compute_shared_vpc_service_project.svc_proj_attachment": {
+			"address":        "module.pass_case5.google_compute_shared_vpc_service_project.svc_proj_attachment",
+			"depends_on":     [],
+			"deposed_key":    "",
+			"index":          null,
+			"mode":           "managed",
+			"module_address": "module.pass_case5",
+			"name":           "svc_proj_attachment",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"tainted":        false,
+			"type":           "google_compute_shared_vpc_service_project",
+			"values": {
+				"host_project":    "unprotected-host-project-4",
+				"service_project": "a-service-project-3",
+				"timeouts":        null,
+			},
+		},
+		"module.pass_case5.google_project_iam_member.gke_hostagent_binding": {
+			"address":        "module.pass_case5.google_project_iam_member.gke_hostagent_binding",
+			"depends_on":     [],
+			"deposed_key":    "",
+			"index":          null,
+			"mode":           "managed",
+			"module_address": "module.pass_case5",
+			"name":           "gke_hostagent_binding",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"tainted":        false,
+			"type":           "google_project_iam_member",
+			"values": {
+				"condition": [],
+				"project":   "unprotected-host-project-4",
+				"role":      "roles/container.hostServiceAgentUser",
+			},
+		},
+		"module.pass_case5.google_project_service.gke_svc": {
+			"address":        "module.pass_case5.google_project_service.gke_svc",
+			"depends_on":     [],
+			"deposed_key":    "",
+			"index":          null,
+			"mode":           "managed",
+			"module_address": "module.pass_case5",
+			"name":           "gke_svc",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"tainted":        false,
+			"type":           "google_project_service",
+			"values": {
+				"disable_dependent_services": false,
+				"disable_on_destroy":         false,
+				"project":                    "a-service-project-3",
+				"service":                    "container.googleapis.com",
+				"timeouts":                   null,
+			},
+		},
+		"module.pass_case5.google_project_service_identity.gke_hostagent_sa": {
+			"address":        "module.pass_case5.google_project_service_identity.gke_hostagent_sa",
+			"depends_on":     [],
+			"deposed_key":    "",
+			"index":          null,
+			"mode":           "managed",
+			"module_address": "module.pass_case5",
+			"name":           "gke_hostagent_sa",
+			"provider_name":  "registry.terraform.io/hashicorp/google-beta",
+			"tainted":        false,
+			"type":           "google_project_service_identity",
+			"values": {
+				"project":  "a-service-project-3",
+				"service":  "container.googleapis.com",
+				"timeouts": null,
+			},
+		},
+	},
+}
+
+variables = {
+	"environment": {
+		"name":  "environment",
+		"value": "uat",
+	},
+	"organization": {
+		"name":  "organization",
+		"value": "op",
+	},
+	"service_project_id": {
+		"name":  "service_project_id",
+		"value": "a-service-project-3",
+	},
+}
+
+resource_changes = {
+	"module.pass_case5.google_compute_shared_vpc_service_project.svc_proj_attachment": {
+		"address": "module.pass_case5.google_compute_shared_vpc_service_project.svc_proj_attachment",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"host_project":    "unprotected-host-project-4",
+				"service_project": "a-service-project-3",
+				"timeouts":        null,
+			},
+			"after_unknown": {
+				"id": true,
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.pass_case5",
+		"name":           "svc_proj_attachment",
+		"provider_name":  "registry.terraform.io/hashicorp/google",
+		"type":           "google_compute_shared_vpc_service_project",
+	},
+	"module.pass_case5.google_project_iam_member.gke_hostagent_binding": {
+		"address": "module.pass_case5.google_project_iam_member.gke_hostagent_binding",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"condition": [],
+				"project":   "unprotected-host-project-4",
+				"role":      "roles/container.hostServiceAgentUser",
+			},
+			"after_unknown": {
+				"condition": [],
+				"etag":      true,
+				"id":        true,
+				"member":    true,
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.pass_case5",
+		"name":           "gke_hostagent_binding",
+		"provider_name":  "registry.terraform.io/hashicorp/google",
+		"type":           "google_project_iam_member",
+	},
+	"module.pass_case5.google_project_service.gke_svc": {
+		"address": "module.pass_case5.google_project_service.gke_svc",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"disable_dependent_services": false,
+				"disable_on_destroy":         false,
+				"project":                    "a-service-project-3",
+				"service":                    "container.googleapis.com",
+				"timeouts":                   null,
+			},
+			"after_unknown": {
+				"id": true,
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.pass_case5",
+		"name":           "gke_svc",
+		"provider_name":  "registry.terraform.io/hashicorp/google",
+		"type":           "google_project_service",
+	},
+	"module.pass_case5.google_project_service_identity.gke_hostagent_sa": {
+		"address": "module.pass_case5.google_project_service_identity.gke_hostagent_sa",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"project":  "a-service-project-3",
+				"service":  "container.googleapis.com",
+				"timeouts": null,
+			},
+			"after_unknown": {
+				"email": true,
+				"id":    true,
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.pass_case5",
+		"name":           "gke_hostagent_sa",
+		"provider_name":  "registry.terraform.io/hashicorp/google-beta",
+		"type":           "google_project_service_identity",
+	},
+}
+
+output_changes = {}
+
+raw = {
+	"configuration": {
+		"provider_config": {
+			"module.pass_case5:google": {
+				"module_address":     "module.pass_case5",
+				"name":               "google",
+				"version_constraint": ">= 3.57.0",
+			},
+			"module.pass_case5:google-beta": {
+				"module_address":     "module.pass_case5",
+				"name":               "google-beta",
+				"version_constraint": ">= 3.57.0",
+			},
+		},
+		"root_module": {
+			"module_calls": {
+				"pass_case5": {
+					"expressions": {
+						"environment": {
+							"references": [
+								"var.environment",
+							],
+						},
+						"organization": {
+							"references": [
+								"var.organization",
+							],
+						},
+						"service_project_id": {
+							"references": [
+								"var.service_project_id",
+							],
+						},
+					},
+					"module": {
+						"resources": [
+							{
+								"address": "google_compute_shared_vpc_service_project.svc_proj_attachment",
+								"expressions": {
+									"host_project": {
+										"references": [
+											"local.host_project_ids",
+											"var.organization",
+											"var.environment",
+										],
+									},
+									"service_project": {
+										"references": [
+											"var.service_project_id",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "svc_proj_attachment",
+								"provider_config_key": "pass_case5:google",
+								"schema_version":      0,
+								"type":                "google_compute_shared_vpc_service_project",
+							},
+							{
+								"address": "google_project_iam_member.gke_hostagent_binding",
+								"expressions": {
+									"member": {
+										"references": [
+											"google_project_service_identity.gke_hostagent_sa",
+										],
+									},
+									"project": {
+										"references": [
+											"local.host_project_ids",
+											"var.organization",
+											"var.environment",
+										],
+									},
+									"role": {
+										"constant_value": "roles/container.hostServiceAgentUser",
+									},
+								},
+								"mode":                "managed",
+								"name":                "gke_hostagent_binding",
+								"provider_config_key": "pass_case5:google",
+								"schema_version":      0,
+								"type":                "google_project_iam_member",
+							},
+							{
+								"address": "google_project_service.gke_svc",
+								"expressions": {
+									"disable_dependent_services": {
+										"constant_value": false,
+									},
+									"disable_on_destroy": {
+										"constant_value": false,
+									},
+									"project": {
+										"references": [
+											"var.service_project_id",
+										],
+									},
+									"service": {
+										"constant_value": "container.googleapis.com",
+									},
+								},
+								"mode":                "managed",
+								"name":                "gke_svc",
+								"provider_config_key": "pass_case5:google",
+								"schema_version":      0,
+								"type":                "google_project_service",
+							},
+							{
+								"address": "google_project_service_identity.gke_hostagent_sa",
+								"depends_on": [
+									"google_project_service.gke_svc",
+								],
+								"expressions": {
+									"project": {
+										"references": [
+											"var.service_project_id",
+										],
+									},
+									"service": {
+										"constant_value": "container.googleapis.com",
+									},
+								},
+								"mode":                "managed",
+								"name":                "gke_hostagent_sa",
+								"provider_config_key": "pass_case5:google-beta",
+								"schema_version":      0,
+								"type":                "google_project_service_identity",
+							},
+						],
+						"variables": {
+							"environment": {
+								"description": "Environment the service project is on. Possible values are: 'dev', 'uat' and 'prd'",
+							},
+							"organization": {
+								"description": "Organization the service project is on. Possible values are: 'od', 'ot,' 'op'",
+							},
+							"service_project_id": {
+								"description": "GCP service project ID",
+							},
+						},
+					},
+					"source":             "app.terraform.io/rjmco/sentinel-simple-module/google",
+					"version_constraint": "0.0.1-experiment.1",
+				},
+			},
+			"variables": {
+				"environment": {
+					"description": "Environment the service project is on. Possible values are: 'dev', 'uat' and 'prd'",
+				},
+				"organization": {
+					"description": "Organization the service project is on. Possible values are: 'od', 'ot,' 'op'",
+				},
+				"service_project_id": {
+					"description": "GCP service project ID",
+				},
+			},
+		},
+	},
+	"format_version": "0.1",
+	"planned_values": {
+		"root_module": {
+			"child_modules": [
+				{
+					"address": "module.pass_case5",
+					"resources": [
+						{
+							"address":        "module.pass_case5.google_compute_shared_vpc_service_project.svc_proj_attachment",
+							"mode":           "managed",
+							"name":           "svc_proj_attachment",
+							"provider_name":  "registry.terraform.io/hashicorp/google",
+							"schema_version": 0,
+							"type":           "google_compute_shared_vpc_service_project",
+							"values": {
+								"host_project":    "unprotected-host-project-4",
+								"service_project": "a-service-project-3",
+								"timeouts":        null,
+							},
+						},
+						{
+							"address":        "module.pass_case5.google_project_iam_member.gke_hostagent_binding",
+							"mode":           "managed",
+							"name":           "gke_hostagent_binding",
+							"provider_name":  "registry.terraform.io/hashicorp/google",
+							"schema_version": 0,
+							"type":           "google_project_iam_member",
+							"values": {
+								"condition": [],
+								"project":   "unprotected-host-project-4",
+								"role":      "roles/container.hostServiceAgentUser",
+							},
+						},
+						{
+							"address":        "module.pass_case5.google_project_service.gke_svc",
+							"mode":           "managed",
+							"name":           "gke_svc",
+							"provider_name":  "registry.terraform.io/hashicorp/google",
+							"schema_version": 0,
+							"type":           "google_project_service",
+							"values": {
+								"disable_dependent_services": false,
+								"disable_on_destroy":         false,
+								"project":                    "a-service-project-3",
+								"service":                    "container.googleapis.com",
+								"timeouts":                   null,
+							},
+						},
+						{
+							"address":        "module.pass_case5.google_project_service_identity.gke_hostagent_sa",
+							"mode":           "managed",
+							"name":           "gke_hostagent_sa",
+							"provider_name":  "registry.terraform.io/hashicorp/google-beta",
+							"schema_version": 0,
+							"type":           "google_project_service_identity",
+							"values": {
+								"project":  "a-service-project-3",
+								"service":  "container.googleapis.com",
+								"timeouts": null,
+							},
+						},
+					],
+				},
+			],
+		},
+	},
+	"resource_changes": [
+		{
+			"address": "module.pass_case5.google_compute_shared_vpc_service_project.svc_proj_attachment",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"host_project":    "unprotected-host-project-4",
+					"service_project": "a-service-project-3",
+					"timeouts":        null,
+				},
+				"after_unknown": {
+					"id": true,
+				},
+				"before": null,
+			},
+			"mode":           "managed",
+			"module_address": "module.pass_case5",
+			"name":           "svc_proj_attachment",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"type":           "google_compute_shared_vpc_service_project",
+		},
+		{
+			"address": "module.pass_case5.google_project_iam_member.gke_hostagent_binding",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"condition": [],
+					"project":   "unprotected-host-project-4",
+					"role":      "roles/container.hostServiceAgentUser",
+				},
+				"after_unknown": {
+					"condition": [],
+					"etag":      true,
+					"id":        true,
+					"member":    true,
+				},
+				"before": null,
+			},
+			"mode":           "managed",
+			"module_address": "module.pass_case5",
+			"name":           "gke_hostagent_binding",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"type":           "google_project_iam_member",
+		},
+		{
+			"address": "module.pass_case5.google_project_service.gke_svc",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"disable_dependent_services": false,
+					"disable_on_destroy":         false,
+					"project":                    "a-service-project-3",
+					"service":                    "container.googleapis.com",
+					"timeouts":                   null,
+				},
+				"after_unknown": {
+					"id": true,
+				},
+				"before": null,
+			},
+			"mode":           "managed",
+			"module_address": "module.pass_case5",
+			"name":           "gke_svc",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"type":           "google_project_service",
+		},
+		{
+			"address": "module.pass_case5.google_project_service_identity.gke_hostagent_sa",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"project":  "a-service-project-3",
+					"service":  "container.googleapis.com",
+					"timeouts": null,
+				},
+				"after_unknown": {
+					"email": true,
+					"id":    true,
+				},
+				"before": null,
+			},
+			"mode":           "managed",
+			"module_address": "module.pass_case5",
+			"name":           "gke_hostagent_sa",
+			"provider_name":  "registry.terraform.io/hashicorp/google-beta",
+			"type":           "google_project_service_identity",
+		},
+	],
+	"terraform_version": "0.14.7",
+	"variables": {
+		"environment": {
+			"value": "uat",
+		},
+		"organization": {
+			"value": "op",
+		},
+		"service_project_id": {
+			"value": "a-service-project-3",
+		},
+	},
+}

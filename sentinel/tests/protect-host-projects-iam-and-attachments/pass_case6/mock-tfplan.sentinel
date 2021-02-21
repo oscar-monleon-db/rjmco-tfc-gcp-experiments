@@ -1,0 +1,225 @@
+import "strings"
+import "types"
+
+_modules = {
+	"root": {
+		"data":      {},
+		"path":      [],
+		"resources": {},
+	},
+
+	"module.pass_case6.module.attach_gke_service_project": {
+		"data": {},
+		"path": [
+			"pass_case6",
+			"attach_gke_service_project",
+		],
+		"resources": {
+			"google_compute_shared_vpc_service_project": {
+				"svc_proj_attachment": {
+					0: {
+						"applied": {
+							"host_project":    "unprotected-host-project-5",
+							"service_project": "a-service-project-4",
+							"timeouts":        null,
+						},
+						"destroy": false,
+						"diff": {
+							"host_project": {
+								"computed": false,
+								"new":      "unprotected-host-project-5",
+								"old":      "",
+							},
+							"id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"service_project": {
+								"computed": false,
+								"new":      "a-service-project-4",
+								"old":      "",
+							},
+							"timeouts": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+						},
+						"requires_new": false,
+					},
+				},
+			},
+			"google_project_iam_member": {
+				"gke_hostagent_binding": {
+					0: {
+						"applied": {
+							"condition": [],
+							"project":   "unprotected-host-project-5",
+							"role":      "roles/container.hostServiceAgentUser",
+						},
+						"destroy": false,
+						"diff": {
+							"condition.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"etag": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"member": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"project": {
+								"computed": false,
+								"new":      "unprotected-host-project-5",
+								"old":      "",
+							},
+							"role": {
+								"computed": false,
+								"new":      "roles/container.hostServiceAgentUser",
+								"old":      "",
+							},
+						},
+						"requires_new": false,
+					},
+				},
+			},
+			"google_project_service": {
+				"gke_svc": {
+					0: {
+						"applied": {
+							"disable_dependent_services": false,
+							"disable_on_destroy":         false,
+							"project":                    "a-service-project-4",
+							"service":                    "container.googleapis.com",
+							"timeouts":                   null,
+						},
+						"destroy": false,
+						"diff": {
+							"disable_dependent_services": {
+								"computed": false,
+								"new":      "false",
+								"old":      "",
+							},
+							"disable_on_destroy": {
+								"computed": false,
+								"new":      "false",
+								"old":      "",
+							},
+							"id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"project": {
+								"computed": false,
+								"new":      "a-service-project-4",
+								"old":      "",
+							},
+							"service": {
+								"computed": false,
+								"new":      "container.googleapis.com",
+								"old":      "",
+							},
+							"timeouts": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+						},
+						"requires_new": false,
+					},
+				},
+			},
+			"google_project_service_identity": {
+				"gke_hostagent_sa": {
+					0: {
+						"applied": {
+							"project":  "a-service-project-4",
+							"service":  "container.googleapis.com",
+							"timeouts": null,
+						},
+						"destroy": false,
+						"diff": {
+							"email": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"project": {
+								"computed": false,
+								"new":      "a-service-project-4",
+								"old":      "",
+							},
+							"service": {
+								"computed": false,
+								"new":      "container.googleapis.com",
+								"old":      "",
+							},
+							"timeouts": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+						},
+						"requires_new": false,
+					},
+				},
+			},
+		},
+	},
+}
+
+module_paths = [
+	[],
+	[
+		"pass_case6",
+		"attach_gke_service_project",
+	],
+]
+
+terraform_version = "0.14.7"
+
+variables = {
+	"environment":        "prd",
+	"organization":       "op",
+	"service_project_id": "a-service-project-4",
+}
+
+module = func(path) {
+	if types.type_of(path) is not "list" {
+		error("expected list, got", types.type_of(path))
+	}
+
+	if length(path) < 1 {
+		return _modules.root
+	}
+
+	addr = []
+	for path as p {
+		append(addr, "module")
+		append(addr, p)
+	}
+
+	return _modules[strings.join(addr, ".")]
+}
+
+data = _modules.root.data
+path = _modules.root.path
+resources = _modules.root.resources

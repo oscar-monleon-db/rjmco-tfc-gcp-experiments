@@ -1,0 +1,33 @@
+id = "run-GgAA8ZmxYRuxwyTo"
+created_at = "2021-02-21T17:12:06.640Z"
+message = "Fixes pass_case6 src & version"
+commit_sha = "a292ad15e55a7bbaf6015f55d40f47187d451d6d"
+speculative = false
+is_destroy = false
+target_addrs = null
+
+variables = {
+	"GOOGLE_CREDENTIALS": {
+		"category":  "env",
+		"sensitive": true,
+	},
+}
+
+organization = {
+	"name": "rjmco",
+}
+
+workspace = {
+	"auto_apply":  false,
+	"created_at":  "2021-02-21T17:08:01.790Z",
+	"description": null,
+	"id":          "ws-WQ6NizRyYBR654hM",
+	"name":        "rjmco-tfc-gcp-experiments_pass_case6",
+	"vcs_repo": {
+		"branch":             "",
+		"display_identifier": "rjmco/rjmco-tfc-gcp-experiments",
+		"identifier":         "rjmco/rjmco-tfc-gcp-experiments",
+		"ingress_submodules": false,
+	},
+	"working_directory": "pass_case6",
+}

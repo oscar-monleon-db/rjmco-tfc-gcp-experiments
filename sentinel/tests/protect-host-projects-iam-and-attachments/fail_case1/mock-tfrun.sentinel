@@ -1,0 +1,33 @@
+id = "run-ojztcoB2VsirhSd7"
+created_at = "2021-02-21T17:27:40.581Z"
+message = "Adds fail_case1"
+commit_sha = "315bde1b16403a37a5054c7e14cb71a1368e5c8e"
+speculative = false
+is_destroy = false
+target_addrs = null
+
+variables = {
+	"GOOGLE_CREDENTIALS": {
+		"category":  "env",
+		"sensitive": true,
+	},
+}
+
+organization = {
+	"name": "rjmco",
+}
+
+workspace = {
+	"auto_apply":  false,
+	"created_at":  "2021-02-21T17:26:45.875Z",
+	"description": null,
+	"id":          "ws-nXVeWLM4SNtgqUXs",
+	"name":        "rjmco-tfc-gcp-experiments_fail_case1",
+	"vcs_repo": {
+		"branch":             "",
+		"display_identifier": "rjmco/rjmco-tfc-gcp-experiments",
+		"identifier":         "rjmco/rjmco-tfc-gcp-experiments",
+		"ingress_submodules": false,
+	},
+	"working_directory": "fail_case1",
+}
