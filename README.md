@@ -1,54 +1,58 @@
 # rjmco-tfc-gcp-experiments
 
-Terraform Cloud /w GCP integration experiment
+Terraform Cloud & Sentinel experimentations /w GCP resources
 
-This repository contains Terraform code to help create mocks for the test cases of a Sentinel policy which performs the following checks:
-
-* restrict the use of google_project_iam_member and google_compute_shared_vpc_service_project resources to the following list of allowed modules if the project being targeted by the resources is one of a list of hypothetical host projects.
+This repository contains Terraform code which help create the mocks for test cases of a Sentinel policy which restrict the use of google_project_iam_member and google_compute_shared_vpc_service_project resources to the following list of allowed Terraform modules if the projects being targeted by the resources are one of a list of hypothetically protected host projects.
 
 ```
-app.terraform.io/rjmco/simple_module
-app.terraform.io/rjmco/nested_module
+app.terraform.io/rjmco/sentinel-simple-module/google
+app.terraform.io/rjmco/sentinel-nested-module/google
 ```
 
+To help mocking scenarios where "alien" Terraform modules are used, the following Terraform modules are also used:
+
+```
+app.terraform.io/rjmco/sentinel-illegal-module/google
+app.terraform.io/rjmco/sentinel-illegal-nested-module/google
+```
 ## Sentinel policy specification
 
-* The Sentinel policy should have a list of host projects that it tries to protect when two specific resource types (`google_project_iam_member` and `google_compute_shared_vpc_service_project`) are deployed. If one of these types of resources are deployed to one of the host projects, then the policy should make sure that these resources are being deployed by either the `app.terraform.io/rjmco/sentinel-simple-module/google` or a submodule of `app.terraform.io/rjmco/sentinel-nested-module/google`. If the resources are deployed to a protected host project from the root module or any other module (even if one of the allowed modules are included on the same Terraform run) the Sentinel Policy should fail.
+* The Sentinel policy [sentinel/protect-host-projects-iam-and-attachments] should have a list of host projects that it tries to protect when two specific resource types (`google_project_iam_member` and `google_compute_shared_vpc_service_project`) are deployed. If one of these types of resources are deployed to one of the host projects, then the policy should make sure that these resources are being deployed by either the `app.terraform.io/rjmco/sentinel-simple-module/google` Terraform module or the `app.terraform.io/rjmco/sentinel-nested-module/google` Terraform module, or submodules of both. If the resources are deployed to a protected host project from the root module or any other module (even if one of the allowed modules are included on the same Terraform run) the Sentinel Policy should fail.
 
 ## GCP projects setup
 
-The following steps imply that the project is created under a folder in a GCP organization.
+A simple GCP project with a permissionless service account key is all that was needed to enable Terraform Cloud to successfully generate Terraform plans and allow for the mocks to be downloaded.
 
-```
-export HOST_PROJECT_ID=<...>
-export SERVICE_PROJECT_ID=<...>
-export FOLDER_ID=<...>
-export BILLING_ACCOUNT=<...>
-
-gcloud projects create $HOST_PROJECT_ID --folder $FOLDER_ID --no-enable-cloud-apis
-gcloud projects create $SERVICE_PROJECT_ID --folder $FOLDER_ID --no-enable-cloud-apis
-gcloud beta billing projects link $HOST_PROJECT_ID --billing-account $BILLING_ACCOUNT
-gcloud beta billing projects link $SERVICE_PROJECT_ID --billing-account $BILLING_ACCOUNT
-
-gcloud services enable compute.googleapis.com --project $HOST_PROJECT_ID
-gcloud compute shared-vpc enable --project $HOST_PROJECT_ID
-```
+All projects referenced on the code are ficticious and if they exist it is out of coincidence.
 
 ## Terraform Modules
 
-* `simple_module` is a module which is available through `app.terraform.io/rjmco/sentinel-simple-module/google`. This module should be allowed by Sentinel to deploy the protected resources on any of a list of host projects;
+* `simple_module` is a module which is available through `app.terraform.io/rjmco/sentinel-simple-module/google`. This module should be allowed by Sentinel to deploy the protected resources on any project on a list of protected host projects;
 
-* `illegal_module` is a module which is available through `app.terraform.io/rjmco/sentinel-illegal-module/google`. This modules should not be allowed by Sentinel to deploy the projected resources to any of a list of host projects. It should however not prevent the 
+* `illegal_module` is a module which is available through `app.terraform.io/rjmco/sentinel-illegal-module/google`. This modules should not be allowed by Sentinel to deploy the protected resources to any project on a list of protected host projects.
 
-* `nested_module` is a wrapper for a sub-directory module called `simple_module` which contains the same exact code as the `simple_module`. This module is available through `app.terraform.io/rjmco/sentinel-nested-module/google`
+* `nested_module` is a wrapper for a sub-directory module called `simple_module` which contains the same exact code as the `simple_module`. This module is available through `app.terraform.io/rjmco/sentinel-nested-module/google`. The Sentinel policy should behave in the same way with this module as it would with the `simple_module`.
 
-* `illegal_nested_module` is a module which is available through `app.terraform.io/rjmco/sentinel-illegal-nested-module/google` is an exact replica of `nested_module`.
+* `illegal_nested_module` is a module which is available through `app.terraform.io/rjmco/sentinel-illegal-nested-module/google` is an exact replica of `nested_module`. The Sentinel policy should behave in the same way with this module as it would with the `nested_module`.
+
+The Terraform Modules mentioned above can be found on the following GitHub repositories:
+
+[https://github.com/rjmco/terraform-google-sentinel-simple-module]
+[https://github.com/rjmco/terraform-google-sentinel-nested-module]
+[https://github.com/rjmco/terraform-google-sentinel-illegal-module]
+[https://github.com/rjmco/terraform-google-sentinel-illegal-nested-module]
 
 ## List of test cases
 
-The following test cases mention protected projects. Protected projects are host projects that we which to restrict modifications by restricting modifications from being deployed through specific authorized modules monitored by a Sentinel policy. This policy however does not care if the project is a host project or not, it just cares about its ID.
+The following test cases mention protected projects. Protected projects are host projects that can only have resources deployed through specific authorized modules monitored by Sentinel policy. This policy however does not care if the project is a host project or not, it just cares about its ID.
 
-For the purpose of test setup, only projects on the 'od' organization are considered to be protected.
+For the purpose of test setup, only projects on the 'od' organization are considered to be protected. These have the following project IDs:
+
+```
+protected-host-project-0
+protected-host-project-1
+protected-host-project-2
+```
 
 ### Pass cases
 
