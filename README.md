@@ -2,14 +2,14 @@
 
 Terraform Cloud & Sentinel experimentations /w GCP resources
 
-This repository contains Terraform code which help create the mocks for test cases of a Sentinel policy which restrict the use of google_project_iam_member and google_compute_shared_vpc_service_project resources to the following list of allowed Terraform modules if the projects being targeted by the resources are one of a list of hypothetically protected host projects.
+This repository contains Terraform code which help create the mocks for test cases of a Sentinel policy which restrict the use of `google_project_iam_member` and `google_compute_shared_vpc_service_project` resources to the following list of allowed Terraform modules if the projects being targeted by the resources are one of a list of hypothetically protected host projects.
 
 ```
 app.terraform.io/rjmco/sentinel-simple-module/google
 app.terraform.io/rjmco/sentinel-nested-module/google
 ```
 
-To help mocking scenarios where "alien" Terraform modules are used, the following Terraform modules are also used:
+To help mocking scenarios where *alien* Terraform modules are used, the following Terraform modules are also used:
 
 ```
 app.terraform.io/rjmco/sentinel-illegal-module/google
@@ -17,7 +17,7 @@ app.terraform.io/rjmco/sentinel-illegal-nested-module/google
 ```
 ## Sentinel policy specification
 
-* The Sentinel policy [sentinel/protect-host-projects-iam-and-attachments] should have a list of host projects that it tries to protect when two specific resource types (`google_project_iam_member` and `google_compute_shared_vpc_service_project`) are deployed. If one of these types of resources are deployed to one of the host projects, then the policy should make sure that these resources are being deployed by either the `app.terraform.io/rjmco/sentinel-simple-module/google` Terraform module or the `app.terraform.io/rjmco/sentinel-nested-module/google` Terraform module, or submodules of both. If the resources are deployed to a protected host project from the root module or any other module (even if one of the allowed modules are included on the same Terraform run) the Sentinel Policy should fail.
+The Sentinel policy [protect-host-projects-iam-and-attachments.sentinel](sentinel/protect-host-projects-iam-and-attachments.sentinel) should have a list of host projects that it tries to protect when two specific resource types (`google_project_iam_member` and `google_compute_shared_vpc_service_project`) are deployed. If one of these types of resources are deployed to one of the host projects, then the policy should make sure that these resources are being deployed by either the `app.terraform.io/rjmco/sentinel-simple-module/google` Terraform module or the `app.terraform.io/rjmco/sentinel-nested-module/google` Terraform module, or submodules of both. If the resources are deployed to a protected host project from the root module or any other module (even if one of the allowed modules are included on the same Terraform run) the Sentinel Policy should fail.
 
 ## GCP projects setup
 
