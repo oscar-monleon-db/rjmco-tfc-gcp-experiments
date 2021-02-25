@@ -19,6 +19,8 @@ app.terraform.io/rjmco/sentinel-illegal-nested-module/google
 
 The Sentinel policy [protect-host-projects-iam-and-attachments.sentinel](sentinel/protect-host-projects-iam-and-attachments.sentinel) should have a list of host projects that it tries to protect when two specific resource types (`google_project_iam_member` and `google_compute_shared_vpc_service_project`) are deployed. If one of these types of resources are deployed to one of the host projects, then the policy should make sure that these resources are being deployed by either the `app.terraform.io/rjmco/sentinel-simple-module/google` Terraform module or the `app.terraform.io/rjmco/sentinel-nested-module/google` Terraform module, or submodules of both. If the resources are deployed to a protected host project from the root module or any other module (even if one of the allowed modules are included on the same Terraform run) the Sentinel Policy should fail.
 
+As a first development iteration, to avoid the ambiguity of knowing which project the `google_project_iam_member` resource is being applied to when the `project` field is omitted, the policy should fail with a message asking the Terraform user to declare the `project` field.
+
 ## GCP projects setup
 
 A simple GCP project with a permissionless service account key is all that was needed to enable Terraform Cloud to successfully generate Terraform plans and allow for the mocks to be downloaded.
@@ -71,6 +73,7 @@ protected-host-project-2
 * `fail_case2` tries to deploy `google_compute_shared_vpc_service_project` on one of the protected host projects from TF's root module 
 * `fail_case3` tries to deploy both type of resources on one of the protected projects with the `illegal_module`;
 * `fail_case4` tries to deploy both type of resources on one of the protected projects with the `illegal_nested_module`;
+* `fail_case5` tries to deploy `google_project_iam_member` omitting the `project` field;
 
 ## Terraform Cloud Generated Sentinel Mocks
 
