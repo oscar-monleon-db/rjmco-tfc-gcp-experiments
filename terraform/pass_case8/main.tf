@@ -1,4 +1,4 @@
-module "pass_case6" {
+module "pass_case8" {
   source  = "app.terraform.io/rjmco/sentinel-nested-module/google"
   version = "0.0.1+experiment.2"
 
