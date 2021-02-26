@@ -1,4 +1,4 @@
-module "pass_case5" {
+module "pass_case7" {
   source  = "app.terraform.io/rjmco/sentinel-simple-module/google"
   version = "0.0.1-experiment.1"
 
